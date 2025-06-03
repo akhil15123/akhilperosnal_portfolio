@@ -257,5 +257,27 @@
    * Initiate Pure Counter 
    */
   new PureCounter();
+  window.addEventListener('load', () => {
+    // Initialize Isotope
+    var iso = new Isotope('.portfolio-container', {
+      itemSelector: '.portfolio-item',
+      layoutMode: 'fitRows'
+    });
+  
+    // Filter buttons
+    const filters = document.querySelectorAll('#portfolio-flters li');
+  
+    filters.forEach(filter => {
+      filter.addEventListener('click', function (e) {
+        e.preventDefault();
+        filters.forEach(el => el.classList.remove('filter-active'));
+        this.classList.add('filter-active');
+  
+        const filterValue = this.getAttribute('data-filter');
+        iso.arrange({ filter: filterValue });
+      });
+    });
+  });
+  
 
 })()

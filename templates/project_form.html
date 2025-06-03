@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block content %}
+<section id="project-form" class="project-form section-bg py-5">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>{% if object %}Edit Project{% else %}New Project{% endif %}</h2>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            {{ form.title }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            {{ form.description }}
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">GitHub Link</label>
+                {{ form.github_link }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Category</label>
+                {{ form.category }}
+              </div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label">Project Image</label>
+            {{ form.image }}
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
