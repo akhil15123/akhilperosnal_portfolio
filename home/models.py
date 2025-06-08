@@ -9,7 +9,9 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
-class Project(models.Model):
+
+# ✅ Step 1 — Create a separate Category model
+class Category(models.Model):
     CATEGORY_CHOICES = [
         ('python', 'Python'),
         ('django', 'Django'),
@@ -20,13 +22,19 @@ class Project(models.Model):
         ('webdevelopment', 'Web Development'),
         ('ml', 'Machine Learning'),
     ]
-    ...
-    
+    code = models.CharField(max_length=50, choices=CATEGORY_CHOICES, unique=True)
+
+    def __str__(self):
+        return dict(self.CATEGORY_CHOICES).get(self.code, self.code)
+
+
+# ✅ Step 2 — Change Project to use ManyToManyField
+class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     github_link = models.URLField(blank=True)
     image = models.ImageField(upload_to='projects/')
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    categories = models.ManyToManyField(Category)
     technologies = models.CharField(max_length=200, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 

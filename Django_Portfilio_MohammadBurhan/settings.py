@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'Django_Portfilio_MohammadBurhan.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'yourdbname',  # Replace with your database name
+        'USER': 'yourusername',  # Replace with your PostgreSQL user
+        'PASSWORD': 'yourpassword',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',  # Or your database host if using an external database
+        'PORT': '5432',  # Default port for PostgreSQL
     }
 }
 
@@ -133,3 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media files (Uploaded content like project images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CSRF_TRUSTED_ORIGINS = ['http://3.147.140.222']
