@@ -48,11 +48,12 @@
         <img src="{% static 'img/profile-img.jpg' %}" alt="Akhil Bonthinayanivari" class="img-fluid rounded-circle">
         <h1 class="text-light" style="font-size: 20px;"><a href="#">Akhil Bonthinayanivari</a></h1>
         <div class="social-links mt-3 text-center">
-          <a href="https://twitter.com/akhilbonthi" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.linkedin.com/in/akhilbonthi" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://github.com/akhilbonthi" class="github" target="_blank"><i class="bx bxl-github"></i></a>
-          <a href="https://wa.me/14709408044" class="whatsapp" target="_blank"><i class="bx bxl-whatsapp"></i></a>
-        </div>
+          <a href="https://x.com/akhilbn2?s=11" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.linkedin.com/in/akhil-bonthinayanivari-b66319234" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://github.com/akhil15123" class="github" target="_blank"><i class="bx bxl-github"></i></a>
+          <a href="http://wa.me/14709408044" class="whatsapp" target="_blank"><i class="bx bxl-whatsapp"></i></a>
+      </div>
+      
       </div>
 
       <nav id="navbar" class="nav-menu navbar">
@@ -101,7 +102,8 @@
           <div class="col-lg-6">
             <ul>
               <li><i class="bi bi-chevron-right"></i> <strong>LinkedIn:</strong> 
-                <span><a href="https://www.linkedin.com/in/akhilbonthi" target="_blank">linkedin.com/in/akhilbonthi</a></span></li>
+                <span><a href="https://www.linkedin.com/in/akhil-bonthinayanivari-b66319234" target="_blank">linkedin.com/in/akhil-bonthinayanivari-b66319234</a></span>
+
               <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+1 470-940-8044</span></li>
               <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>akhilme008@gmail.com</span></li>
             </ul>
@@ -371,6 +373,34 @@
       <h2>Projects</h2>
       <p>Explore some of the key projects I've worked on, showcasing my expertise in various technologies.</p>
     </div>
+    <!-- <div id="chat-box" style="max-width: 500px;">
+      <div id="messages"></div>
+      <input type="text" id="user-input" placeholder="Type here..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+    
+    <script>
+      async function sendMessage() {
+        const msg = document.getElementById("user-input").value;
+        const messagesDiv = document.getElementById("messages");
+    
+        messagesDiv.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+    
+        const response = await fetch("/gemini-chat/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg })
+        });
+    
+        const data = await response.json();
+    
+        // ✅ Check if reply exists before accessing
+        const reply = data.reply || "Sorry, no response from Gemini.";
+        messagesDiv.innerHTML += `<p><b>Gemini:</b> ${reply}</p>`;
+        document.getElementById("user-input").value = "";
+      }
+    </script>
+         -->
 
     <!-- Filter Buttons -->
     <ul id="portfolio-flters" class="d-flex justify-content-center flex-wrap mb-4">
@@ -380,40 +410,46 @@
       {% endfor %}
     </ul>
 
-    <!-- Project Cards Container -->
     <div class="row portfolio-container gy-4" data-aos="fade-up" data-aos-delay="100">
       {% for project in projects %}
-      <div class="col-lg-4 col-md-6 portfolio-item 
-        {% for cat in project.categories.all %}{{ cat.code|slugify }} {% endfor %}">
-
-        <div class="card h-100 shadow-sm project-card">
-          <a href="{{ project.image.url }}" class="portfolio-lightbox" title="{{ project.title }}">
-            <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
-          </a>                  
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title" title="{{ project.title }}">
-              {{ project.title|truncatechars:30 }}
-            </h5>
-
-            <p class="text-muted text-center">
-              {% for cat in project.categories.all %}
-                {{ cat.get_code_display }}{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-            </p>
+        <div class="col-lg-4 col-md-6 portfolio-item 
+          {% for cat in project.categories.all %}{{ cat.code|slugify }} {% endfor %}"
+          data-aos="zoom-in"
+          data-aos-delay="{{ forloop.counter|add:'1' }}00">
+    
+          <div class="card h-100 shadow-sm project-card">
+            <div class="image-overlay-wrapper">
+              <a href="{{ project.image.url }}" class="portfolio-lightbox" title="{{ project.title }}">
+                <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                <div class="overlay">
+                  <span class="btn btn-sm btn-light">View</span>
+                </div>
+              </a>
+            </div>
             
-            <p class="card-text small">{{ project.description|default:"" }}</p>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">{{ project.title|truncatechars:30 }}</h5>
+              <p class="text-muted text-center">
+                {% for cat in project.categories.all %}
+                  {{ cat.get_code_display }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+              <p class="card-text small">{{ project.description|default:"" }}</p>
+            </div>
+    
+            {% if project.github_link %}
+            <div class="card-footer text-center">
+              <a href="{{ project.github_link }}" class="custom-btn" target="_blank">
+                <i class="bx bxl-github"></i> GitHub
+              </a>
+                            
+            </div>
+            {% endif %}
           </div>
-
-          {% if project.github_link %}
-          <div class="card-footer text-center">
-            <a href="{{ project.github_link }}" class="btn btn-outline-primary btn-sm" target="_blank">
-              <i class="bx bxl-github"></i> GitHub
-            </a>
-          </div>
-          {% endif %}
         </div>
-      </div>
       {% endfor %}
+    </div>
+    
     </div>
   </div>
 </section>
@@ -625,7 +661,8 @@
         &copy; 2025 <strong><span>Akhil Bonthinayanivari</span></strong>. All Rights Reserved.
       </div>
       <div class="credits">
-        Designed by <a href="https://www.linkedin.com/in/akhilbonthi" target="_blank">Akhil Bonthinayanivari</a>
+        Designed by <a href="https://www.linkedin.com/in/akhil-bonthinayanivari-b66319234" target="_blank">Akhil Bonthinayanivari</a>
+
       </div>
     </div>
   </footer><!-- End Footer -->

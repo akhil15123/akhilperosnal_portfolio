@@ -52,8 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Django_Portfilio_MohammadBurhan.urls'
-
+ROOT_URLCONF = 'Django_Portfolio_Akhil.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,8 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Django_Portfilio_MohammadBurhan.wsgi.application'
-
+WSGI_APPLICATION = 'Django_Portfolio_Akhil.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -138,3 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CSRF_TRUSTED_ORIGINS = ['http://3.147.140.222']
+# from dotenv import load_dotenv
+
+# load_dotenv()
+# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

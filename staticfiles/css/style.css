@@ -1330,3 +1330,60 @@ section {
   padding: 5px 15px;
   font-size: 14px;
 }
+/* Overlay on hover */
+.image-overlay-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-overlay-wrapper .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-overlay-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+/* Improve card hover interaction */
+.project-card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Make images fit */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #333;
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.custom-btn:hover {
+  background-color: #000;
+  color: white;
+}

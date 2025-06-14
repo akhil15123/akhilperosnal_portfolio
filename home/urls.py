@@ -3,6 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from home import views
+# from .views import gemini_chat
 
 # Admin branding
 admin.site.site_header = "Login to Burhan"
@@ -14,6 +15,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('projects/', views.projects, name='projects'),
     path('contact/', views.contact, name='contact'),
+    # path('gemini-chat/', gemini_chat, name='gemini_chat'),
 ]
 
 # ✅ Serve static and media files during development
